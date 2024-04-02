@@ -1,5 +1,5 @@
 # Телеграм бот Wildberries_product_info_bot 
-##(Тренировочный проект). 
+## (Тренировочный проект). 
 
 ### По артикулу товара получает карточку товара с информацией
 https://github.com/Mrkorg1000/WB_product_card_bot/blob/main/wb_1.JPG?raw=true
