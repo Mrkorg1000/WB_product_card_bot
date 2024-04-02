@@ -2,6 +2,7 @@
 ## (Тренировочный проект). 
 
 
+### На сайте Wildberries.ru
 ### По артикулу товара получает карточку товара с информацией
 ![example](https://github.com/Mrkorg1000/WB_product_card_bot/blob/main/wb_1.JPG?raw=true)
 ### Есть возможность подписаться на товар (кнопка "подписаться", inline).
