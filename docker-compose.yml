@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+  
+  db:
+    container_name: pg_bot
+    build:
+        context: ./Docker
+        dockerfile: db.Dockerfile
+    restart: always 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wb_db
+    
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis:5
+    container_name: redis
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env
+     
+  bot:
+    container_name: bot
+    build: . 
+    ports:
+      - "8000:8000"
+    links:
+      - redis
+    env_file: .env
+    restart: always
+    depends_on:
+      - db
+      - redis
+        
+  celery:
+    build:
+      context: .
+    container_name: celery
+    links:
+      - redis
+    command: celery -A tasks:celery worker -B --loglevel=INFO
+    environment:
+      CELERY_BROKER_URL: 'redis://redis:6379/0'
+    depends_on:
+      - redis
